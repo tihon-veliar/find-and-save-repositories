@@ -1,65 +1,28 @@
-/**
- * @format
- * @flow strict-local
- */
-import React, { useEffect } from 'react';
-import type { Node } from 'react';
+import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { Provider } from 'mobx-react';
 import axios from 'axios';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-const Section = ({ children, title }): Node => {
+import RootStack from './scr/navigation';
+
+import store from './scr/models';
+
+import RepositoryScreen from './scr/screens/RepositoryScreen';
+
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <Provider store={store}>
+      <NavigationContainer>
+        <SafeAreaView>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <RootStack />
+        </SafeAreaView>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  useEffect(() => {
-    (async () => {
-      const answer = await axios.get(
-        ' https://api.github.com/search/repositories?q=react',
-      );
-      console.log(answer);
-    })();
-  }, []);
-
-  return (
-    <NavigationContainer>
-      <SafeAreaView>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      </SafeAreaView>
-    </NavigationContainer>
-  );
-};
 export default App;

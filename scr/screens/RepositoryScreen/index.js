@@ -5,8 +5,9 @@ import { compose } from 'recompose';
 
 import _ from 'lodash';
 
-import ProjectCards from '../../components/ProjectCards';
+import LanguageFilter from '../../components/LanguageFilter';
 import { screenHeight, screenWidth } from '../../core/utils';
+import ProjectCards from '../../components/ProjectCards';
 import { palette } from '../../core/styleGuide/indsx';
 
 const RepositoryScreen = ({
@@ -16,6 +17,7 @@ const RepositoryScreen = ({
     fetchRepositorysBeString,
     isFetching,
     loadeMoreRepositorys,
+    language,
   },
 }) => {
   const [searchString, setSearchString] = useState('');
@@ -53,10 +55,10 @@ const RepositoryScreen = ({
 
   const keyExtractor = useCallback(repo => repo.id, []);
 
-  console.log('repository', repository);
   return (
     <View>
       <Search value={searchString} onChangeText={onSearch} />
+      <LanguageFilter />
       {isFetching && <Black />}
 
       <FlatList

@@ -12,13 +12,7 @@ import Repository from './repository';
 
 const storageKey = '@store';
 
-const blackList = [
-  'repositoryList',
-  'isLoaded',
-  'isFetching',
-  'currentPage',
-  'canLoadeMore',
-];
+const allowedList = ['favoritesList'];
 
 const RootStore = t
   .model('store', {
@@ -28,6 +22,7 @@ const RootStore = t
     isFetching: t.maybeNull(t.boolean, false),
     loadePageNumber: t.optional(t.number, 1),
     canLoadeMore: t.optional(t.boolean, true),
+    selectedLanguages: t.optional(t.array(t.string), []),
   })
   .actions(self => ({
     afterCreate: () => {
@@ -38,7 +33,7 @@ const RootStore = t
         const restored = await RNSecureKeyStore.get(storageKey);
         const snapshot = JSON.parse(restored);
         if (RootStore.is(snapshot)) {
-          applySnapshot(self, _.omit(snapshot, blackList));
+          applySnapshot(self, _.pick(snapshot, allowedList));
         }
       } catch (e) {
         console.warn(e.name, e.message);
@@ -48,6 +43,29 @@ const RootStore = t
     },
     loaded: () => {
       self.isLoaded = true;
+    },
+
+    toggleSelectedLanguages: languages => {
+      let languagesColection = new Set(toJS(self.selectedLanguages));
+      if (languagesColection.has(languages)) {
+        languagesColection.delete(languages);
+      } else {
+        languagesColection.add(languages);
+      }
+      self.selectedLanguages = [...languagesColection];
+    },
+
+    deleteUnusedLanguages: () => {
+      self.selectedLanguages = self.selectedLanguages.filter(selectedLanguage =>
+        self.languages.some(language => selectedLanguage),
+      );
+    },
+
+    isSelectedLanguges: language => {
+      console.log(language);
+      return toJS(self.selectedLanguages).some(
+        selected => language === selected,
+      );
     },
     fetchRepositorysBeString: flow(function* (searchString) {
       self.toggleFetching(true);
@@ -138,12 +156,28 @@ const RootStore = t
   }))
   .views(self => ({
     get repository() {
-      return toJS(self.repositoryList).map(repository => ({
-        ...repository,
-        inFavorits: self.favoritesList.some(
-          favorites => favorites.id === repository.id,
-        ),
-      }));
+      // self.isSelectedLanguges(repository.language)
+
+      return toJS(self.repositoryList)
+        .map(repository => ({
+          ...repository,
+          inFavorits: self.favoritesList.some(
+            favorites => favorites.id === repository.id,
+          ),
+        }))
+        .filter(repository => {
+          return self.selectedLanguages.length > 0
+            ? self.isSelectedLanguges(repository.language)
+            : true;
+        });
+    },
+    get languages() {
+      let categories = new Set();
+      toJS(self.repositoryList).forEach(
+        repository =>
+          repository.language && categories.add(repository.language),
+      );
+      return [...categories];
     },
     get favorites() {
       return toJS(self.favoritesList).map(repo => ({

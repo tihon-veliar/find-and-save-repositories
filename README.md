@@ -1,8 +1,9 @@
 ### find-and-save-repositories
-A small test task written in React Native
+A small test task written in React Native.
+Search repositories and add them to favorite.
 
 
-### Run:
+## Run:
 
 ```bash
 

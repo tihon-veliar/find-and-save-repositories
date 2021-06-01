@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 import ProjectCards from '../../components/ProjectCards';
 import { screenHeight } from '../../core/utils';
-import { palette } from '../../core/styleGuide/indsx';
+import { palette } from '../../core/styleGuide';
 
 const FavoritesList = ({ store: { favorites, toggleFavorites } }) => (
   <View>
@@ -26,13 +26,5 @@ const Scroll = styled.ScrollView`
   border: 1px solid green;
 `;
 const View = styled.View``;
-
-const Black = styled.View`
-  background-color: ${palette.spaceCadet};
-  width: 40px;
-  height: 40px;
-`;
-
-const Search = styled.TextInput``;
 
 export default compose(inject('store'), observer)(FavoritesList);

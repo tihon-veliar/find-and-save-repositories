@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import styled from 'styled-components';
 import { fontScaleNormalize, moderateScale } from '../../core/utils';
-import { palette } from '../../core/styleGuide/indsx';
+import { palette } from '../../core/styleGuide';
 import { useCallback } from 'react/cjs/react.development';
 
 const LanguageFilter = ({

@@ -24,7 +24,6 @@ export const ProjectCards = ({
   }, [url]);
 
   const addToFavorites = useCallback(() => {
-    console.log('add to Fav', id);
     toggleFavorites(id);
   }, [id, toggleFavorites]);
 

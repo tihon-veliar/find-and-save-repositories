@@ -27,10 +27,7 @@ const RootStack = () => {
           component={RepositoryScreen}
           options={{
             tabBarLabel: 'List',
-            tabBarIcon: props => {
-              console.log('props', props);
-              return <List color={props.color} />;
-            },
+            tabBarIcon: props => <List color={props.color} />,
           }}
         />
 
@@ -39,15 +36,12 @@ const RootStack = () => {
           component={FavoritesList}
           options={{
             tabBarLabel: 'Favorites',
-            tabBarIcon: props => {
-              console.log('props', props);
-              return (
-                <ToggleFavorites
-                  color={props.color}
-                  isFavorites={props.focused}
-                />
-              );
-            },
+            tabBarIcon: props => (
+              <ToggleFavorites
+                color={props.color}
+                isFavorites={props.focused}
+              />
+            ),
           }}
         />
       </Tab.Navigator>

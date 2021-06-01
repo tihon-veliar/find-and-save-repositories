@@ -62,7 +62,6 @@ const RootStore = t
     },
 
     isSelectedLanguges: language => {
-      console.log(language);
       return toJS(self.selectedLanguages).some(
         selected => language === selected,
       );
@@ -73,9 +72,7 @@ const RootStore = t
       try {
         const { status, data } = yield getRepositoryByName(searchString);
         if (status === 200) {
-          console.log('repositoryList---', self.repositoryList.length);
           self.setRepositories(data?.items);
-          console.log('repositoryList+++', self.repositoryList.length);
           if (self.repositoryList.length === data.total_count) {
             self.toggleCanLoadeMore(false);
           }
@@ -92,7 +89,6 @@ const RootStore = t
       self.canLoadeMore = bool;
     },
     loadeMoreRepositorys: flow(function* (searchString) {
-      console.log('loadeMoreRepositorys', self.isFetching);
       if (!self.isFetching) {
         self.toggleFetching(true);
         try {
@@ -113,7 +109,6 @@ const RootStore = t
           self.toggleCanLoadeMore(true);
           self.setLoadePageNumber();
         } finally {
-          console.log('isFetchingEnd ', self.isFetching);
           self.toggleFetching(false);
         }
       }
@@ -127,7 +122,6 @@ const RootStore = t
     },
     setRepositories: (repositoryList = [], { push = false } = {}) => {
       try {
-        console.log('repositoryList', repositoryList);
         self.repositoryList = push
           ? [
             ...withoutDuplicate([

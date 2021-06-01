@@ -127,6 +127,7 @@ const RootStore = t
     },
     setRepositories: (repositoryList = [], { push = false } = {}) => {
       try {
+        console.log('repositoryList', repositoryList);
         self.repositoryList = push
           ? [
             ...withoutDuplicate([

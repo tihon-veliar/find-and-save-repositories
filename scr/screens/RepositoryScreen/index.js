@@ -5,13 +5,8 @@ import { compose } from 'recompose';
 
 import _ from 'lodash';
 
+import { fontScaleNormalize, moderateScale } from '../../core/utils';
 import LanguageFilter from '../../components/LanguageFilter';
-import {
-  fontScaleNormalize,
-  moderateScale,
-  screenHeight,
-  screenWidth,
-} from '../../core/utils';
 import ProjectCards from '../../components/ProjectCards';
 import { palette } from '../../core/styleGuide';
 

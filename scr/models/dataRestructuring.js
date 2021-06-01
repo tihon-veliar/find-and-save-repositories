@@ -4,6 +4,7 @@ export const restructuringTheRepository = arreyOfRepository =>
     full_name: repo.full_name,
     avatar_url: repo?.owner?.avatar_url,
     description: repo.description,
-    url: repo.url,
+    url: repo.clone_url,
     language: repo.language,
+    stargazers_count: repo.stargazers_count,
   }));

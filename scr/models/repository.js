@@ -7,6 +7,7 @@ const Repository = t.model('repository', {
   description: t.maybeNull(t.string),
   url: t.maybeNull(t.string),
   language: t.maybeNull(t.string),
+  stargazers_count: t.maybeNull(t.number),
 });
 
 export default Repository;

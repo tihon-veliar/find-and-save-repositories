@@ -1,14 +1,11 @@
 import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'mobx-react';
-import axios from 'axios';
 
 import RootStack from './scr/navigation';
 
 import store from './scr/models';
-
-import RepositoryScreen from './scr/screens/RepositoryScreen';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';

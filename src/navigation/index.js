@@ -1,13 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import RepositoryScreen from '../screens/RepositoryScreen';
 import FavoritesList from '../screens/FavoritesList';
 import screens from './screens';
-import { palette } from '../core/styleGuide';
-import { fontScaleNormalize, moderateScale } from '../core/utils';
+
 import ToggleFavorites from '../components/ToggleFavorites';
+import { palette } from '../core/styleGuide';
 import List from '../components/icons/List';
 
 const Tab = createBottomTabNavigator();

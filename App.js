@@ -3,9 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { Provider } from 'mobx-react';
 
-import RootStack from './scr/navigation';
+import RootStack from './src/navigation';
 
-import store from './scr/models';
+import store from './src/models';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';

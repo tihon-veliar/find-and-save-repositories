@@ -3,8 +3,6 @@ import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 import { compose } from 'recompose';
 
-import _ from 'lodash';
-
 import { fontScaleNormalize, moderateScale } from '../../core/utils';
 import ProjectCards from '../../components/ProjectCards';
 import { palette } from '../../core/styleGuide';

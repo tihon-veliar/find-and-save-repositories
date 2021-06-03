@@ -83,9 +83,6 @@ const Row = styled.View`
 `;
 
 const Favorites = styled.TouchableOpacity`
-  /* width: ${moderateScale(15)}px; */
-  /* height: ${moderateScale(15)}px; */
-  /* background-color: ${palette.goldWebGolden}; */
   align-items: center;
   justify-content: center;
   margin-left: auto;
@@ -131,7 +128,6 @@ const Avatar = styled.Image`
   margin: ${moderateScale(5)}px;
   margin-left: auto;
   margin-right: auto;
-  /* border: ${moderateScale(1)}px solid ${palette.aliceBlue}; */
 `;
 
 export default ProjectCards;

@@ -4,7 +4,6 @@ import { compose } from 'recompose';
 import styled from 'styled-components';
 import { fontScaleNormalize, moderateScale } from '../../core/utils';
 import { palette } from '../../core/styleGuide';
-import { useCallback } from 'react/cjs/react.development';
 
 const LanguageFilter = ({
   store: { languages, toggleSelectedLanguages, selectedLanguages },
@@ -13,11 +12,11 @@ const LanguageFilter = ({
     <Container>
       <ScrollView horizontal={true}>
         {languages.map(title => (
-          <Touchblable
+          <Touchable
             onPress={() => toggleSelectedLanguages(title)}
             isSelected={selectedLanguages.some(selected => selected === title)}>
             <Text>{title.toUpperCase()}</Text>
-          </Touchblable>
+          </Touchable>
         ))}
       </ScrollView>
     </Container>
@@ -28,7 +27,7 @@ const Container = styled.View``;
 
 const ScrollView = styled.ScrollView``;
 
-const Touchblable = styled.TouchableOpacity`
+const Touchable = styled.TouchableOpacity`
   margin: ${moderateScale(13)}px ${moderateScale(7)}px;
   padding: ${moderateScale(9)}px ${moderateScale(26)}px;
   border-radius: ${moderateScale(26)}px;
